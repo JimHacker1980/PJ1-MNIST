@@ -11,8 +11,8 @@ from draw_tools.plot import plot
 # fixed seed for experiment
 np.random.seed(309)
 
-train_images_path = 'dataset\MNIST\\train-images-idx3-ubyte.gz'
-train_labels_path = 'dataset\MNIST\\train-labels-idx1-ubyte.gz'
+train_images_path = '\\kaggle\\working\\PJ1-MNIST\\dataset\MNIST\\train-images-idx3-ubyte.gz'
+train_labels_path = '\\kaggle\\working\\PJ1-MNIST\\dataset\MNIST\\train-labels-idx1-ubyte.gz'
 
 with gzip.open(train_images_path, 'rb') as f:
     magic, num, rows, cols = unpack('>4I', f.read(16))
