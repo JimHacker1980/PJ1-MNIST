@@ -86,30 +86,29 @@ class Model_CNN(Layer):
         self.params = {}  # Trainable parameters
 
         # Convolutional Block 1
-        self.add_layer(Reshape((1,28,28)))
-        self.add_layer(conv2D(in_channels=1, out_channels=4, kernel_size=3, padding=1))
+        self.add_layer(conv2D(in_channels=1, out_channels=32, kernel_size=3, padding=1))
         self.add_layer(ReLU())
-        self.add_layer(BatchNorm2D(4))
-        self.add_layer(conv2D(in_channels=4, out_channels=4, kernel_size=3, padding=1))
+        self.add_layer(BatchNorm2D(32))
+        self.add_layer(conv2D(in_channels=32, out_channels=32, kernel_size=3, padding=1))
         self.add_layer(ReLU())
-        self.add_layer(BatchNorm2D(4))
+        self.add_layer(BatchNorm2D(32))
         self.add_layer(MaxPool2D(kernel_size=2, stride=2))
 
         # Convolutional Block 2
-        self.add_layer(conv2D(in_channels=4, out_channels=8, kernel_size=3, padding=1))
+        self.add_layer(conv2D(in_channels=32, out_channels=64, kernel_size=3, padding=1))
         self.add_layer(ReLU())
-        self.add_layer(BatchNorm2D(8))
-        self.add_layer(conv2D(in_channels=8, out_channels=8, kernel_size=3, padding=1))
+        self.add_layer(BatchNorm2D(64))
+        self.add_layer(conv2D(in_channels=64, out_channels=64, kernel_size=3, padding=1))
         self.add_layer(ReLU())
-        self.add_layer(BatchNorm2D(8))
+        self.add_layer(BatchNorm2D(64))
         self.add_layer(MaxPool2D(kernel_size=2, stride=2))
 
         # Fully Connected Layer
         self.add_layer(Flatten())
-        self.add_layer(Linear(in_dim=392, out_dim=100))
+        self.add_layer(Linear(in_dim=64 * 7 * 7, out_dim=512))
         self.add_layer(ReLU())
         self.add_layer(Dropout(0.5))
-        self.add_layer(Linear(in_dim=100, out_dim=10))
+        self.add_layer(Linear(in_dim=512, out_dim=10))
 
     def __call__(self, X):
         return self.forward(X)
